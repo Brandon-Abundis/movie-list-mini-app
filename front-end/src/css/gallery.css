@@ -1,0 +1,18 @@
+.movie-gallery {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.movie-card img{
+  height: 400px;
+  width: fit-content;
+}
+
+.movie-card p{
+  width: 270px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

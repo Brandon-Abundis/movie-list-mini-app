@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "express": "^5.2.1",
+    "knex": "^3.2.8",
+    "nodemon": "^3.1.14",
+    "pg": "^8.20.0"
+  },
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

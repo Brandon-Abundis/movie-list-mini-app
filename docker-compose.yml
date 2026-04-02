@@ -1,6 +1,11 @@
 services:
   db:
     image: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     container_name: pg-docker
     environment:
       # - DATABASE_HOST=127.0.0.1
@@ -10,18 +15,21 @@ services:
     ports:
       - 5432:5432
 
-  # api:
-  #   build: ./api
-  #   ports:
-  #     - 8080:8080
-  #   volumes:
-  #     - ./api:/app
-  #     - /app/node_modules
-  #   environment:
-  #     # FIX: This tells Knex to connect to the 'movies' container, not localhost
-  #     - DATABASE_URL=postgres://postgres:docker@db:5432/movies
-  #   depends_on:
-  #     - db
+  api:
+    # Update the build context to your new folder name
+    build: ./back-end
+    command: npm run docker:setup
+    ports:
+      - 8080:8080
+    volumes:
+      # Update the host path for the bind mount
+      - ./back-end:/app
+      - /app/node_modules
+    environment:
+      - DATABASE_URL=postgres://postgres:docker@db:5432/movies
+    depends_on:
+      db:
+        condition: service_healthy
 
   # ui:
   #   build: ./ui
